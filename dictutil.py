@@ -20,17 +20,20 @@ def merged(d1, d2, func=None):
 
 class BetterDict(dict):
     def __add__(self, other):
-        return merged(self, other, add)
+        return BetterDict(merged(self, other, add))
 
     def __sub__(self, other):
-        return merged(self, other, sub)
+        return BetterDict(merged(self, other, sub))
 
     def __mul__(self, other):
-        return merged(self, other, mul)
+        return BetterDict(merged(self, other, mul))
 
     def __div__(self, other):
-        return merged(self, other, div)
-    
+        return BetterDict(merged(self, other, div))
+
+    def keys(self):
+        return set(super(BetterDict, self).keys())
+
     def merge(self, other, func=None):
         """
         In-place update of self with other. When they have a key in common,
