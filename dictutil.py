@@ -41,11 +41,12 @@ class BetterDict(dict):
         """
         if func is None:
             self.update(other)
-        for k in other:
-            if k in self:
-                self[k] = func(self[k], other[k])
-            else:
-                self[k] = other[k]
+        else:
+            for k in other:
+                if k in self:
+                    self[k] = func(self[k], other[k])
+                else:
+                    self[k] = other[k]
 
 if __name__ == '__main__':
     pass
