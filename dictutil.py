@@ -30,17 +30,11 @@ class BetterDict(dict):
 
     def __div__(self, other):
         return merged(self, other, div)
-
-    def __gt__(self, other):
-        pass
-
-    def __lt__(self, other):
-        pass
-
+    
     def merge(self, other, func=None):
         """
-        In-place update of self with other, but when they have a key in common,
-        combine their values useing func.
+        In-place update of self with other. When they have a key in common,
+        combine their values using func.
         """
         if func is None:
             self.update(other)
