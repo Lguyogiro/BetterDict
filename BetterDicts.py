@@ -1,4 +1,5 @@
 from operator import add, sub, mul, div
+from collections import OrderedDict
 
 
 def merged(d1, d2, func=None):
@@ -15,21 +16,25 @@ def merged(d1, d2, func=None):
                 d[k] = func(d[k], d2[k])
             else:
                 d[k] = d2[k]
+
     return d
 
 
 class BetterDict(dict):
     def __add__(self, other):
-        return BetterDict(merged(self, other, add))
+        return merged(self, other, add)
 
     def __sub__(self, other):
-        return BetterDict(merged(self, other, sub))
+        return merged(self, other, sub)
 
     def __mul__(self, other):
-        return BetterDict(merged(self, other, mul))
+        return merged(self, other, mul)
 
     def __div__(self, other):
-        return BetterDict(merged(self, other, div))
+        return merged(self, other, div)
+
+    def copy(self):
+        return type(self)(self.items())
 
     def keys(self):
         return set(super(BetterDict, self).keys())
@@ -47,6 +52,10 @@ class BetterDict(dict):
                     self[k] = func(self[k], other[k])
                 else:
                     self[k] = other[k]
+
+
+class BetterOrderedDict(BetterDict, OrderedDict):
+    pass
 
 if __name__ == '__main__':
     pass
