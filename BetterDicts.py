@@ -1,5 +1,5 @@
 from operator import add, sub, mul, div
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 
 
 def merged(d1, d2, func=None):
@@ -54,8 +54,17 @@ class BetterDict(dict):
                     self[k] = other[k]
 
 
+class BetterDefaultDict(BetterDict, defaultdict):
+    def __init__(self, *args):
+        defaultdict.__init__(self, *args)
+
+    def copy(self):
+        return defaultdict.copy(self)
+
+
 class BetterOrderedDict(BetterDict, OrderedDict):
     pass
+
 
 if __name__ == '__main__':
     pass
