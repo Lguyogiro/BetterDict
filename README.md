@@ -1,5 +1,7 @@
 Mergeable Python dictionaries with arithmetic operator support.
 ```python
+   from BetterDicts import BetterDict, merged
+   
    # add values of like keys with `+` operator
    >>> hour1_views = BetterDict({"user1": 4, "user2": 5, "user3": 1})
    >>> hour2_views = BetterDict({"user4": 9, "user2": 2, "user6": 6})
