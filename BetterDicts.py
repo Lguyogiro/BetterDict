@@ -1,5 +1,6 @@
-from operator import add, sub, mul, div
+import numbers
 from collections import OrderedDict, defaultdict
+from operator import add, sub, mul, div
 
 
 def merged(d1, d2, func=None):
@@ -22,19 +23,24 @@ def merged(d1, d2, func=None):
 
 class BetterDict(dict):
     def __add__(self, other):
+        if isinstance(other, int):
+            return self.__byscalar(other, add)
         return merged(self, other, add)
 
-    def __sub__(self, other):
-        return merged(self, other, sub)
-
-    def __mul__(self, other):
-        return merged(self, other, mul)
-
-    def __div__(self, other):
-        return merged(self, other, div)
+    def __byscalar(self, scalar, op, right=False):
+        type_ = type(self)
+        if right:
+            return type_({k: op(scalar, v) for k, v in self.items()})
+        else:
+            return type_({k: op(v, scalar) for k, v in self.items()})
 
     def copy(self):
         return type(self)(self.items())
+
+    def __div__(self, other):
+        if isinstance(other, numbers.Real):
+            return self.__byscalar(other, div)
+        return merged(self, other, div)
 
     def keys(self):
         return set(super(BetterDict, self).keys())
@@ -52,6 +58,34 @@ class BetterDict(dict):
                     self[k] = func(self[k], other[k])
                 else:
                     self[k] = other[k]
+
+    def __mul__(self, other):
+        if isinstance(other, numbers.Real):
+            return self.__byscalar(other, mul)
+        return merged(self, other, mul)
+
+    def __radd__(self, other):
+        return self.__add__(other)
+
+    def __rdiv__(self, other):
+        if isinstance(other, numbers.Real):
+            return self.__byscalar(other, div, right=True)
+        else:
+            return merged(other, self, div)
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __rsub__(self, other):
+        if isinstance(other, numbers.Real):
+            return self.__byscalar(other, sub, right=True)
+        else:
+            return merged(other, self, sub)
+
+    def __sub__(self, other):
+        if isinstance(other, numbers.Real):
+            return self.__byscalar(other, sub)
+        return merged(self, other, sub)
 
 
 class BetterDefaultDict(BetterDict, defaultdict):
