@@ -1,5 +1,5 @@
 import numbers
-from collections import OrderedDict, defaultdict
+from collections import OrderedDict, defaultdict, Counter
 from operator import add, sub, mul, div
 
 
@@ -89,8 +89,14 @@ class BetterDict(dict):
 
 
 class BetterDefaultDict(BetterDict, defaultdict):
-    def __init__(self, *args):
-        defaultdict.__init__(self, *args)
+    def __init__(self, arg):
+        if issubclass(type(arg), dict):
+            default_factory = type(arg.itervalues().next())
+            defaultdict.__init__(self, default_factory)
+            for k, v in arg.iteritems():
+                self[k] = v
+        else:
+            defaultdict.__init__(self, arg)
 
     def copy(self):
         return defaultdict.copy(self)
@@ -98,6 +104,15 @@ class BetterDefaultDict(BetterDict, defaultdict):
 
 class BetterOrderedDict(BetterDict, OrderedDict):
     pass
+
+
+class BetterCounter(BetterDict, Counter):
+    def __init__(self, *args):
+        Counter.__init__(self, *args)
+        
+    @classmethod
+    def fromkeys(cls, *args):
+        BetterCounter(dict.fromkeys(*args))
 
 
 if __name__ == '__main__':
