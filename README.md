@@ -1,4 +1,4 @@
-Mergeable Python dictionary/OrderedDict/defaultdict with arithmetic operator support.
+Mergeable Python dictionary/OrderedDict/defaultdict/Counter with arithmetic operator support.
 ```python
    from BetterDicts import BetterDict, BetterOrderedDict, BetterDefaultDict, merged
 
