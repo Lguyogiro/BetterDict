@@ -1,6 +1,12 @@
+import sys
 import numbers
 from collections import OrderedDict, defaultdict, Counter
-from operator import add, sub, mul, div
+from operator import add, sub, mul
+
+if sys.version_info[0] == 3:
+    from operator import truediv
+else:
+    from operator import div as truediv
 
 
 def merged(d1, d2, func=None):
