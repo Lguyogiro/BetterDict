@@ -4,9 +4,9 @@ from collections import OrderedDict, defaultdict, Counter
 from operator import add, sub, mul
 
 if sys.version_info[0] == 3:
-    from operator import truediv
+    from operator import truediv as div
 else:
-    from operator import div as truediv
+    from operator import div
 
 
 def merged(d1, d2, func=None):
