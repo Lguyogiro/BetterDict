@@ -119,7 +119,8 @@ class BetterDefaultDict(BetterDict, defaultdict):
 
 
 class BetterOrderedDict(BetterDict, OrderedDict):
-    pass
+    def keys(self):
+        return OrderedDict.keys(self)
 
 
 class BetterCounter(BetterDict, Counter):
