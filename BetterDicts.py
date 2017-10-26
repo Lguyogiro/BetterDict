@@ -38,6 +38,16 @@ class BetterDict(dict):
             return self.__byscalar(other, div)
         return merged(self, other, div)
 
+    def __truediv__(self, other):
+        if isinstance(other, numbers.Real):
+            return self.__byscalar(other, div)
+        return merged(self, other, div)
+    
+    def __floordiv__(self, other):
+        if isinstance(other, numbers.Real):
+            return self.__byscalar(other, div)
+        return merged(self, other, div)
+    
     def __mul__(self, other):
         if isinstance(other, numbers.Real):
             return self.__byscalar(other, mul)
