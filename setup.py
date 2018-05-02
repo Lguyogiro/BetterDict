@@ -18,7 +18,8 @@ setup(
     packages=['betterdicts'],
     url='https://github.com/Lguyogiro/BetterDict',
     license='MIT',
-    author='betterdicts contributors',
+    author='Robert Pugh, Patrick Lange',
+    author_email='robert.pugh408@gmail.com, mail@langep.com',
     description=(
         'Mergeable Python dictionary/OrderedDict/defaultdict/Counter '
         'with arithmetic operator support'
