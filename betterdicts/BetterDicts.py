@@ -1,5 +1,6 @@
-import sys
 import numbers
+import sys
+
 from collections import OrderedDict, defaultdict, Counter
 from operator import add, sub, mul
 
