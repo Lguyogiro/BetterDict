@@ -1,4 +1,4 @@
-from BetterDicts import (
+from .BetterDicts import (
     merged,
     BetterDict,
     BetterDefaultDict,

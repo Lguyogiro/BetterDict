@@ -27,7 +27,7 @@ setup(
     long_description=DESCRIPTION,
     classifiers=[
         'Development Status :: 4 - Beta',
-        'Topic :: Software Development :: Libraries :: Python Modules'
+        'Topic :: Software Development :: Libraries :: Python Modules',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
